@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
-import { join, relative } from "node:path";
+import { basename, join, relative } from "node:path";
 import { spawnSync } from "node:child_process";
 const root = process.cwd(),
   skip = new Set([
@@ -23,7 +23,18 @@ const all = files(root);
 let failed = false;
 let checked = 0;
 for (const p of all) {
-  if (!/\.(mjs|js|jsx|json|md|yml|yaml|html|css)$/.test(p)) continue;
+  if (
+    !/\.(mjs|js|jsx|json|md|yml|yaml|html|css|txt|command)$/.test(p) &&
+    ![
+      "LICENSE",
+      "NOTICE",
+      "Dockerfile",
+      ".dockerignore",
+      ".gitignore",
+      ".prettierignore",
+    ].includes(basename(p))
+  )
+    continue;
   const text = readFileSync(p, "utf8");
   checked++;
   for (const pattern of [
@@ -62,11 +73,18 @@ for (const required of [
   "docs/DEPLOYMENT.md",
   "docs/ACCEPTANCE.md",
   "AGENTS.md",
+  "LICENSE",
+  "NOTICE",
+  "public/THIRD_PARTY_NOTICES.txt",
 ])
   if (!existsSync(required)) {
     console.error(`Missing deliverable: ${required}`);
     failed = true;
   }
+if (JSON.parse(readFileSync("package.json", "utf8")).license !== "Apache-2.0") {
+  console.error("Missing or unexpected package license declaration.");
+  failed = true;
+}
 console.log(
   `Checked ${checked} source/document files: syntax, JSON, secret patterns and product identity.`,
 );
