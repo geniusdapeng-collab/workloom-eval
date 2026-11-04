@@ -39,6 +39,7 @@ for (const p of all) {
   checked++;
   for (const pattern of [
     /gh[pousr]_[A-Za-z0-9]{24,}/,
+    /github_pat_[A-Za-z0-9_]{20,}/,
     /sk-[A-Za-z0-9]{24,}/,
     /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
   ])
