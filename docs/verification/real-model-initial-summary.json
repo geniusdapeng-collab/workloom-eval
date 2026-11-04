@@ -1,0 +1,202 @@
+{
+  "schema": "workloom.verification/v1",
+  "source": "real platform HTTP business entries",
+  "model": "deepseek-flash",
+  "dataMode": "synthetic business with real model",
+  "initial": [
+    {
+      "jobId": "jobs_ed2312fb097940159e14",
+      "type": "evaluate",
+      "status": "completed",
+      "usedTokens": 20415,
+      "result": {
+        "runId": "runs_b4b78d29f804421e839c",
+        "reportId": "repo_431e237c10c94c258941",
+        "metrics": {
+          "score": 93.8,
+          "passRate": 1,
+          "passed": 5,
+          "total": 5,
+          "valid": 5,
+          "failed": 0,
+          "incomplete": 0,
+          "violations": 0,
+          "latencyMs": 9077,
+          "p95LatencyMs": 13014,
+          "tokens": 20415,
+          "uniqueCases": 5,
+          "stableCases": 5,
+          "interval": {
+            "lower": 0.5655175352168251,
+            "upper": 1,
+            "level": 0.95
+          },
+          "firstAttemptPassRate": 1,
+          "totalJobTokens": 20415
+        },
+        "cancelled": false,
+        "budgetExhausted": false
+      }
+    },
+    {
+      "jobId": "jobs_3c8c0937a4f0424cbdb9",
+      "type": "create_employee",
+      "status": "completed",
+      "usedTokens": 5952,
+      "result": {
+        "employeeId": "empl_4cf7ed5a5ec94615882a",
+        "versionId": "vers_d82b90efb2094505a740",
+        "datasetId": "data_e612d5d1e7d248799391",
+        "gaps": [
+          "缺少身份核验工具/数据源：无法在系统内验证客户身份与订单归属，需接入或提供人工核验结果。",
+          "缺少主管转交/审批通道：超过500元或异常单需要转主管时无可用工具/流程接口。",
+          "缺少退款幂等键生成或重复退款查询工具：仅能依赖现有 refund_order 的幂等能力与人工记录，需确认实现。"
+        ],
+        "usedTokens": 5952
+      }
+    }
+  ],
+  "matrix": [
+    {
+      "jobId": "jobs_50211f331d2347f9b649",
+      "type": "optimize",
+      "status": "completed",
+      "usedTokens": 88617,
+      "metrics": null,
+      "error": null
+    },
+    {
+      "jobId": "jobs_b4f49d579ac44fb287c5",
+      "type": "team_evaluate",
+      "status": "completed",
+      "usedTokens": 4047,
+      "metrics": {
+        "score": 96,
+        "passRate": 1,
+        "passed": 1,
+        "total": 1,
+        "valid": 1,
+        "failed": 0,
+        "incomplete": 0,
+        "violations": 0,
+        "latencyMs": 9143,
+        "p95LatencyMs": 9143,
+        "tokens": 4047,
+        "uniqueCases": 1,
+        "stableCases": 1,
+        "interval": {
+          "lower": 0.20654931437723745,
+          "upper": 1,
+          "level": 0.95
+        },
+        "firstAttemptPassRate": 1
+      },
+      "error": null
+    },
+    {
+      "jobId": "jobs_00034451f9694ab0852f",
+      "type": "memory_evaluate",
+      "status": "completed",
+      "usedTokens": 7685,
+      "metrics": {
+        "score": 80.5,
+        "passRate": 0.5,
+        "passed": 1,
+        "total": 2,
+        "valid": 2,
+        "failed": 1,
+        "incomplete": 0,
+        "violations": 0,
+        "latencyMs": 8585,
+        "p95LatencyMs": 9412,
+        "tokens": 7685,
+        "uniqueCases": 2,
+        "stableCases": 1,
+        "interval": {
+          "lower": 0.09453120573423074,
+          "upper": 0.9054687942657693,
+          "level": 0.95
+        },
+        "firstAttemptPassRate": 0.5
+      },
+      "error": null
+    },
+    {
+      "jobId": "jobs_b5fb10f77b4e48e3a131",
+      "type": "shadow_evaluate",
+      "status": "completed",
+      "usedTokens": 3132,
+      "metrics": {
+        "score": 100,
+        "passRate": 1,
+        "passed": 1,
+        "total": 1,
+        "valid": 1,
+        "failed": 0,
+        "incomplete": 0,
+        "violations": 0,
+        "latencyMs": 4620,
+        "p95LatencyMs": 4620,
+        "tokens": 3132,
+        "uniqueCases": 1,
+        "stableCases": 1,
+        "interval": {
+          "lower": 0.20654931437723745,
+          "upper": 1,
+          "level": 0.95
+        },
+        "firstAttemptPassRate": 1,
+        "totalJobTokens": 3132,
+        "reusedCaseCount": 0,
+        "reusedTokens": 0
+      },
+      "error": null
+    },
+    {
+      "jobId": "jobs_1c8e38ac70d74cf192b5",
+      "type": "long_horizon",
+      "status": "completed",
+      "usedTokens": 2070,
+      "metrics": {
+        "score": 57.5,
+        "passRate": 0.5,
+        "total": 2,
+        "valid": 2,
+        "passed": 1,
+        "failed": 1,
+        "incomplete": 0,
+        "violations": 0,
+        "latencyMs": 4319,
+        "tokens": 2070,
+        "uniqueCases": 2,
+        "stableCases": 1,
+        "interval": {
+          "lower": 0.09453120573423074,
+          "upper": 0.9054687942657693,
+          "level": 0.95
+        }
+      },
+      "error": null
+    },
+    {
+      "jobId": "jobs_781e3a5fa5bd4b8186f0",
+      "type": "skill_repair",
+      "status": "failed",
+      "usedTokens": 0,
+      "metrics": null,
+      "error": {
+        "code": "SKILL_REPAIR_DATASET_REQUIRED",
+        "message": "技能改进需要训练/开发数据集或已评测的基线记录"
+      }
+    }
+  ],
+  "search": {
+    "ok": true,
+    "resultCount": 2
+  },
+  "limitations": [
+    "No customer production actions",
+    "No hosted DeepSeek fine-tuning receipt",
+    "Candidates may regress and remain unpromoted"
+  ]
+}

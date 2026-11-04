@@ -1,0 +1,8 @@
+.git
+node_modules
+.runtime
+work
+outputs
+.env*
+coverage
+test-results

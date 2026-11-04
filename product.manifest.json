@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "workloom.product/v1",
+  "productId": "workloom-eval",
+  "role": "evaluation-platform",
+  "displayName": "WorkLoom Eval",
+  "description": "数字员工评测与迭代平台",
+  "packageName": "@workloom/eval",
+  "repository": "geniusdapeng-collab/workloom-eval",
+  "defaultBranch": "main",
+  "clientDelivery": {
+    "mode": "repo-owned",
+    "note": "独立产品前后端及私有执行节点随本仓版本发布，不自动变更基座或隔离仓。"
+  },
+  "release": {
+    "appId": "com.workloom.eval",
+    "channel": "stable",
+    "artifactPrefix": "WorkLoom-Eval"
+  },
+  "runtime": {
+    "node": ">=24",
+    "entry": "server/index.mjs",
+    "port": 4317,
+    "storage": "SQLite WAL"
+  },
+  "boundaries": {
+    "baseSync": "none",
+    "crossProductWrites": false,
+    "productionToolWrites": "approval-required"
+  }
+}

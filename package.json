@@ -1,0 +1,36 @@
+{
+  "name": "@workloom/eval",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "数字员工评测与迭代平台",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node --watch server/index.mjs",
+    "dev:web": "vite --host 127.0.0.1 --port 4318",
+    "start": "node server/index.mjs",
+    "build": "vite build",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "runner": "node scripts/runner.mjs",
+    "format:check": "prettier --check server src scripts tests *.json *.md docs .github",
+    "format": "prettier --write server src scripts tests *.json *.md docs .github"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.6",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "hono": "4.13.16",
+    "lucide-react": "1.68.0",
+    "pdf-parse": "2.4.5",
+    "playwright": "1.64.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "vite": "8.3.5"
+  }
+}
