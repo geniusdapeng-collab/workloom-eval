@@ -554,12 +554,15 @@ export function JobProgress({ job, onCancel, onOpen }) {
                 optimize: "自动迭代",
                 team_evaluate: "班组协作评测",
                 fine_tune: "模型微调",
+                poll_training: "查询训练进度",
                 memory_evaluate: "岗位记忆评测",
                 shadow_evaluate: "影子评测",
                 browser_evaluate: "浏览器评测",
                 skill_repair: "技能修复",
                 long_horizon: "长任务评测",
                 knowledge_regression: "知识更新影响回归",
+                benchmark_portfolio: "版本组合对比评测",
+                reconcile_deployment: "核对部署结果",
               }[job.type] ||
               job.type}
           </button>
