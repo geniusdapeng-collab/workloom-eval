@@ -4,6 +4,8 @@
 
 本项目是独立 WorkLoom 产品，产品标识为 workloom-eval，应用标识为 com.workloom.eval。不会修改或同步其他 WorkLoom 仓库。
 
+项目采用 [Apache License 2.0](LICENSE) 开源，版权声明见 [NOTICE](NOTICE)。前端随附依赖的原始许可与版权声明保存在 [THIRD_PARTY_NOTICES.txt](public/THIRD_PARTY_NOTICES.txt)，构建后可通过 `/THIRD_PARTY_NOTICES.txt` 读取。其他依赖按各自许可证分发。
+
 ## 使用路径
 
 1. 打开工作空间，点击“描述你的用人需求”。

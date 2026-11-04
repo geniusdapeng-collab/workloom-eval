@@ -1,6 +1,7 @@
 {
   "name": "@workloom/eval",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "private": true,
   "type": "module",
   "description": "数字员工评测与迭代平台",
