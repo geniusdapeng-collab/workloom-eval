@@ -1,0 +1,52 @@
+{
+  "schema": "workloom.verification/v1",
+  "date": "2026-11-05",
+  "nodeTests": {
+    "total": 145,
+    "pass": 145,
+    "fail": 0,
+    "skipped": 0,
+    "todo": 0,
+    "source": "node --test tests/*.test.mjs; matched local Chromium binary configured"
+  },
+  "frontendSSR": {
+    "pass": 28,
+    "fail": 0,
+    "source": "live sanitized bootstrap"
+  },
+  "chromeFixtures": {
+    "errorsAndNodes": 10,
+    "recovery": 8,
+    "knowledgeAndTraining": 7,
+    "portfolio": 3,
+    "total": 28,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "pageErrors": 0
+  },
+  "realBrowserViews": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "productionBuild": {
+    "passed": true,
+    "warning": "lucide-react use client directive ignored by bundled non-RSC Vite app"
+  },
+  "sourceCheck": {
+    "passed": true,
+    "credentialPatterns": 0
+  },
+  "unverified": [
+    "Docker image build: local Docker engine unavailable",
+    "Customer cloud production target: not configured",
+    "External hosted weight training: no supported DeepSeek endpoint receipt"
+  ]
+}

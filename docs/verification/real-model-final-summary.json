@@ -1,0 +1,347 @@
+{
+  "schema": "workloom.verification/v1",
+  "date": "2026-11-05",
+  "source": "actual platform HTTP business entries, real DeepSeek API and registered local runner",
+  "dataMode": "synthetic business",
+  "jobs": [
+    {
+      "id": "jobs_95e39e69d3c64a20840e",
+      "type": "long_horizon",
+      "status": "completed",
+      "usedTokens": 5094,
+      "error": null,
+      "result": {
+        "runId": "runs_1d778107915643438d51",
+        "reportId": "repo_ed671b4888984205afca",
+        "metrics": {
+          "score": 100,
+          "passRate": 1,
+          "total": 2,
+          "valid": 2,
+          "passed": 2,
+          "failed": 0,
+          "incomplete": 0,
+          "violations": 0,
+          "latencyMs": 3517,
+          "tokens": 5094,
+          "uniqueCases": 2,
+          "stableCases": 2,
+          "interval": {
+            "lower": 0.34238022750665303,
+            "upper": 1,
+            "level": 0.95
+          }
+        }
+      }
+    },
+    {
+      "id": "jobs_71f4fc47b5374546bcbc",
+      "type": "skill_repair",
+      "status": "completed",
+      "usedTokens": 32284,
+      "error": null,
+      "result": {
+        "runId": "runs_81f12648a2cc4b91be72",
+        "reportId": "repo_8c34eaa8e8c14092b4cc",
+        "candidateVersionId": "vers_842dc020f57f4370952d",
+        "metrics": {
+          "score": 92,
+          "passRate": 1,
+          "passed": 5,
+          "total": 5,
+          "valid": 5,
+          "failed": 0,
+          "incomplete": 0,
+          "violations": 0,
+          "latencyMs": 10942,
+          "p95LatencyMs": 14834,
+          "tokens": 30050,
+          "uniqueCases": 5,
+          "stableCases": 5,
+          "interval": {
+            "lower": 0.5655175352168251,
+            "upper": 1,
+            "level": 0.95
+          },
+          "firstAttemptPassRate": 1,
+          "costUSD": 0.012868788,
+          "costBasis": "USD_estimate",
+          "costScope": "platform-model-calls-only",
+          "totalJobTokens": 30050,
+          "reusedCaseCount": 0,
+          "reusedTokens": 0
+        },
+        "promoted": false
+      }
+    },
+    {
+      "id": "jobs_956421e595654f62a9e0",
+      "type": "team_evaluate",
+      "status": "completed",
+      "usedTokens": 10812,
+      "error": null,
+      "result": {
+        "runId": "runs_14b97ea23ceb4f4ca509",
+        "reportId": "repo_0176d4ae7e95417c81de",
+        "metrics": {
+          "score": 90,
+          "passRate": 1,
+          "passed": 1,
+          "total": 1,
+          "valid": 1,
+          "failed": 0,
+          "incomplete": 0,
+          "violations": 0,
+          "latencyMs": 18341,
+          "p95LatencyMs": 18341,
+          "tokens": 10812,
+          "uniqueCases": 1,
+          "stableCases": 1,
+          "interval": {
+            "lower": 0.20654931437723745,
+            "upper": 1,
+            "level": 0.95
+          },
+          "firstAttemptPassRate": 1,
+          "costUSD": 0.004353276,
+          "costBasis": "USD_estimate",
+          "costScope": "platform-model-calls-only"
+        }
+      }
+    },
+    {
+      "id": "jobs_137d5bebdb44491d8be4",
+      "type": "knowledge_regression",
+      "status": "completed",
+      "usedTokens": 61968,
+      "error": null,
+      "result": {
+        "results": [
+          {
+            "employeeId": "empl_4cf7ed5a5ec94615882a",
+            "baselineVersionId": "vers_d82b90efb2094505a740",
+            "candidateVersionId": "vers_1ce9706b7f1c4e6d804d",
+            "datasetId": "dataset-aftersale-dev",
+            "baselineRunId": "runs_182d0da9134644cb9a13",
+            "candidateRunId": "runs_f3a801e84ce143acbafa",
+            "reportId": "repo_99bdeece56ff4e1fbc1e",
+            "comparison": {
+              "comparable": true,
+              "improved": ["case_4bb256acc8924a479c18"],
+              "regressed": ["case_1baa86eec19d4f87a121"],
+              "criticalRegressions": [],
+              "scoreDelta": -0.4,
+              "passRateDelta": 0,
+              "tokenDelta": 5017,
+              "latencyDeltaMs": -1003,
+              "uncertainty": "同题配对比较；重复执行不作为独立样本。分数差异不证明单项改动因果。"
+            },
+            "status": "evaluated"
+          },
+          {
+            "employeeId": "employee-aftersale",
+            "baselineVersionId": "version-aftersale-01",
+            "candidateVersionId": "vers_01052658459148e48858",
+            "datasetId": "data_5ff1093a0acb487a96d0",
+            "baselineRunId": "runs_e4ac5ebc216c41c99287",
+            "candidateRunId": "runs_68c3770567ab45a1a21b",
+            "reportId": "repo_24e813181f4e4523b719",
+            "comparison": {
+              "comparable": true,
+              "improved": [],
+              "regressed": [],
+              "criticalRegressions": [],
+              "scoreDelta": -2,
+              "passRateDelta": 0,
+              "tokenDelta": -1975,
+              "latencyDeltaMs": -3470,
+              "uncertainty": "同题配对比较；重复执行不作为独立样本。分数差异不证明单项改动因果。"
+            },
+            "status": "evaluated"
+          }
+        ],
+        "gaps": [],
+        "promoted": false
+      }
+    }
+  ],
+  "tools": {
+    "fetch": {
+      "ok": true,
+      "receipt": {
+        "id": "cdc2c4d9-d48e-4652-9f41-a45e86e85e90",
+        "toolId": "tool-deepseek-fetch",
+        "toolRevision": 1,
+        "adapter": "http",
+        "mode": "readonly",
+        "argsHash": "51f2f7636450f381fb13d56511dd5feb1693ca0f5aff8c84d400be47ec4cdc0e",
+        "resultHash": "e87d24ea6800e20bb64624d00a416b0ca04f1e9cc940e5ab231a181f4530f184",
+        "startedAt": "2026-11-04T17:31:17.535Z",
+        "completedAt": "2026-11-04T17:31:17.643Z"
+      },
+      "resultType": "dict",
+      "resultLength": 4009
+    }
+  },
+  "knowledgePublication": {
+    "knowledgeId": "kb-aftersale",
+    "revision": 2
+  },
+  "portfolio": {
+    "jobId": "jobs_9b59a11de2c740169f79",
+    "status": "completed",
+    "usedTokens": 12402,
+    "results": [
+      {
+        "runId": "runs_69251992e43b45eea6e0",
+        "reportId": "repo_4ed301ffcc904370903b",
+        "checkpointIds": [
+          "chec_894e15408d884c589bc2",
+          "chec_0e55118a67d04ceb8f5d"
+        ],
+        "metrics": {
+          "score": 92.5,
+          "passRate": 1,
+          "passed": 2,
+          "total": 2,
+          "valid": 2,
+          "failed": 0,
+          "incomplete": 0,
+          "violations": 0,
+          "latencyMs": 6864,
+          "p95LatencyMs": 8381,
+          "tokens": 5785,
+          "uniqueCases": 2,
+          "stableCases": 2,
+          "interval": {
+            "lower": 0.34238022750665303,
+            "upper": 1,
+            "level": 0.95
+          },
+          "firstAttemptPassRate": 1,
+          "costUSD": 0.002910552,
+          "costBasis": "USD_estimate",
+          "costScope": "platform-model-calls-only",
+          "totalJobTokens": 5785,
+          "reusedCaseCount": 0,
+          "reusedTokens": 0
+        },
+        "cancelled": false,
+        "budgetExhausted": false
+      },
+      {
+        "runId": "runs_f24b924ccf8a45daa672",
+        "reportId": "repo_962bc8d6c7c14c9da16a",
+        "checkpointIds": [
+          "chec_efe640abe00d42aba027",
+          "chec_df06c4efb0714e87895e"
+        ],
+        "metrics": {
+          "score": 91.5,
+          "passRate": 1,
+          "passed": 2,
+          "total": 2,
+          "valid": 2,
+          "failed": 0,
+          "incomplete": 0,
+          "violations": 0,
+          "latencyMs": 6891,
+          "p95LatencyMs": 7150,
+          "tokens": 6617,
+          "uniqueCases": 2,
+          "stableCases": 2,
+          "interval": {
+            "lower": 0.34238022750665303,
+            "upper": 1,
+            "level": 0.95
+          },
+          "firstAttemptPassRate": 1,
+          "costUSD": 0.002980992,
+          "costBasis": "USD_estimate",
+          "costScope": "platform-model-calls-only",
+          "totalJobTokens": 6617,
+          "reusedCaseCount": 0,
+          "reusedTokens": 0
+        },
+        "cancelled": false,
+        "budgetExhausted": false
+      }
+    ],
+    "frontier": [
+      {
+        "versionId": "vers_d82b90efb2094505a740",
+        "runId": "runs_69251992e43b45eea6e0",
+        "label": "V0.1",
+        "quality": 92.5,
+        "cost": 0.002910552,
+        "latencyMs": 6864,
+        "violations": 0,
+        "evidenceLevel": "B",
+        "dominatedBy": []
+      }
+    ],
+    "costBasis": "USD_estimate",
+    "recommendation": "vers_d82b90efb2094505a740"
+  },
+  "experienceImport": {
+    "id": "expe_c5ca83116a554a929b4c",
+    "knowledgeId": "know_c68523b33b57479bb543",
+    "approved": false,
+    "visibility": "private",
+    "requiresReview": true
+  },
+  "privateRunner": {
+    "nodeId": "node_d98a0e35cbc14bdeaa29",
+    "revoked": true,
+    "browserJobs": [
+      {
+        "id": "jobs_f8674133b2144a55b2f3",
+        "status": "completed",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "networkErrors": [],
+        "executionId": "exec_229caead82b045a9833b"
+      },
+      {
+        "id": "jobs_0a4eefe5a21f4307a810",
+        "status": "completed",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "networkErrors": [],
+        "executionId": "exec_d3aa4d2e94e443e88f2e"
+      }
+    ],
+    "script": {
+      "ok": true,
+      "result": {
+        "result": 12,
+        "runtime": "declarative-node-permission-process",
+        "exitCode": 0
+      },
+      "state": {},
+      "receipt": {
+        "id": "a19ab4fa-31ad-459f-8df3-25caf9db1467",
+        "toolId": "tool_44a8569e012e42dfb3e0",
+        "toolRevision": 1,
+        "adapter": "script",
+        "mode": "readonly",
+        "argsHash": "43505d6d01bb8f325e30c6a4994d666bae7867f6fad46e5e9c3129ec6c5439f3",
+        "resultHash": "777159391f81ba29c29e389111210d4f96cd86e4c27af5365f864c3f1af91581",
+        "startedAt": "2026-11-04T17:31:12.014Z",
+        "completedAt": "2026-11-04T17:31:13.623Z",
+        "executionId": "exec_f396d598f47a4d268645",
+        "nodeId": "node_d98a0e35cbc14bdeaa29"
+      }
+    }
+  },
+  "limitations": [
+    "Synthetic business is not customer production",
+    "No hosted DeepSeek fine-tuning receipt",
+    "No public cloud deployment receipt",
+    "Small development sample results do not prove general performance"
+  ]
+}
