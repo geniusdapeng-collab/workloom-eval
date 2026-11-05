@@ -84,7 +84,7 @@ export async function ensureService({
       )
         throw failure(
           "SERVICE_UPGRADE_REQUIRED",
-          "已运行的WorkLoom Eval需更新至支持Agent接口的版本后重启；不会停止未知进程",
+          "已运行的秀吉系统需更新至支持Agent接口的版本后重启；不会停止未知进程",
         );
       return data;
     } catch (error) {

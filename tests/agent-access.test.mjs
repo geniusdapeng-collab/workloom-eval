@@ -42,6 +42,13 @@ test("capabilities are authenticated and identify supported workflows without ke
   const a = fixture(t);
   const c = await (await req(a, "/api/agent/capabilities")).json();
   assert.equal(c.product, "workloom-eval");
+  assert.equal(c.displayName, "丰臣秀吉数字员工评测与迭代平台");
+  assert.equal(c.shortName, "秀吉系统");
+  const health = await (await req(a, "/api/health")).json();
+  assert.equal(health.product, c.product);
+  assert.equal(health.version, c.version);
+  assert.equal(health.displayName, c.displayName);
+  assert.equal(health.shortName, c.shortName);
   assert.equal(c.jobTypes.length, 14);
   assert.equal(c.rules.jobSubmissionIsCompletion, false);
   const remote = fixture(t, true);

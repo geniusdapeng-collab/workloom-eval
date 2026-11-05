@@ -2,8 +2,8 @@
   "schemaVersion": "workloom.product/v1",
   "productId": "workloom-eval",
   "role": "evaluation-platform",
-  "displayName": "WorkLoom Eval",
-  "description": "数字员工评测与迭代平台",
+  "displayName": "丰臣秀吉数字员工评测与迭代平台",
+  "description": "丰臣秀吉数字员工评测与迭代平台，简称秀吉系统",
   "packageName": "@workloom/eval",
   "repository": "geniusdapeng-collab/workloom-eval",
   "defaultBranch": "main",
@@ -26,5 +26,6 @@
     "baseSync": "none",
     "crossProductWrites": false,
     "productionToolWrites": "approval-required"
-  }
+  },
+  "shortName": "秀吉系统"
 }

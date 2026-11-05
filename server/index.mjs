@@ -22,6 +22,9 @@ import { createAdvanced } from "./advanced.mjs";
 import { createAgentAccess } from "./agent-access.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
+const PRODUCT = JSON.parse(
+  readFileSync(resolve(ROOT, "product.manifest.json"), "utf8"),
+);
 const VERSION = JSON.parse(
   readFileSync(resolve(ROOT, "package.json"), "utf8"),
 ).version;
@@ -513,13 +516,21 @@ export function createApplication(options = {}) {
     await next();
   });
   app.get("/api/health", (c) =>
-    c.json({ ok: true, product: "workloom-eval", version: VERSION }),
+    c.json({
+      ok: true,
+      product: "workloom-eval",
+      version: VERSION,
+      displayName: PRODUCT.displayName,
+      shortName: PRODUCT.shortName,
+    }),
   );
   app.get("/api/agent/capabilities", (c) =>
     c.json({
       product: "workloom-eval",
       version: VERSION,
       apiVersion: "1",
+      displayName: PRODUCT.displayName,
+      shortName: PRODUCT.shortName,
       workspace: workspace(c),
       role: c.get("user")?.role,
       authentication: ["local-loopback", "session-cookie", "scoped-bearer"],
@@ -1375,7 +1386,7 @@ export function createApplication(options = {}) {
   } else
     app.get("*", (c) =>
       c.html(
-        '<!doctype html><meta charset="utf-8"><title>WorkLoom Eval</title><p>前端尚未构建。请运行 pnpm build 后启动服务。</p>',
+        '<!doctype html><meta charset="utf-8"><title>丰臣秀吉数字员工评测与迭代平台</title><p>前端尚未构建。请运行 pnpm build 后启动服务。</p>',
       ),
     );
   return {
@@ -1403,9 +1414,7 @@ if (
   const server = serve(
     { fetch: instance.app.fetch, port: instance.port, hostname: instance.host },
     () =>
-      console.log(
-        `WorkLoom Eval ready: http://${instance.host}:${instance.port}`,
-      ),
+      console.log(`秀吉系统 ready: http://${instance.host}:${instance.port}`),
   );
   for (const signal of ["SIGINT", "SIGTERM"])
     process.on(signal, () => {

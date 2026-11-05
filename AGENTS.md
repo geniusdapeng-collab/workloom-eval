@@ -1,4 +1,4 @@
-# WorkLoom Eval development
+# 秀吉系统开发规则（技术项目 workloom-eval）
 
 This repository is the independent digital employee evaluation product authorized in T-2026-1104-0001. GitHub default branch is the source of truth. Do not modify or synchronize other WorkLoom products or isolated copies through this project.
 
