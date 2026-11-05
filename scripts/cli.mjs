@@ -7,7 +7,7 @@ import { operationMetadata } from "../client/operations.mjs";
 
 const MAX_INPUT_BYTES = 16 * 1024 * 1024;
 const help = {
-  product: "WorkLoom Eval CLI",
+  product: "丰臣秀吉数字员工评测与迭代平台（秀吉系统）CLI",
   usage: [
     "workloom-eval --help",
     "workloom-eval capabilities",

@@ -1,4 +1,4 @@
-# WorkLoom Eval HTTP API
+# 秀吉系统 HTTP API
 
 本文供平台前端、集成开发者和工作区管理员使用。接口路径与请求字段对应当前 `server/index.mjs`、`server/engine.mjs` 和 `server/advanced.mjs`。平台默认地址为 `http://127.0.0.1:4317`，请求和响应均使用 UTF-8；除文件上传、导出和运行器接口外，请求体使用 `application/json`。
 
@@ -309,7 +309,7 @@ target 的路径后会追加 `/status`；查询参数重新设置为 employeeId�
 
 ## Agent CLI / MCP 访问
 
-CLI 和 stdio MCP 通过同一 REST API、同一工作区与权限运行。连接器没有直接数据库访问。完整操作 Schema 由 CLI `capabilities` 与 MCP tools/list 提供，服务端 `GET /api/agent/capabilities` 返回产品、版本、apiVersion、当前工作区/角色、14 个任务类型及工作流程约束。
+CLI 和 stdio MCP 通过同一 REST API、同一工作区与权限运行。连接器没有直接数据库访问。完整操作 Schema 由 CLI `capabilities` 与 MCP tools/list 提供，服务端 `GET /api/agent/capabilities` 返回产品、版本、apiVersion、当前工作区/角色、14 个任务类型及工作流程约束。该接口与 `GET /api/health` 都保留技术标识 `product:"workloom-eval"`，并提供业务名称 `displayName:"丰臣秀吉数字员工评测与迭代平台"` 和 `shortName:"秀吉系统"`；连接器仍按原技术标识判断兼容性。
 
 认证优先级：提供 Authorization 时只验证 `Bearer` Agent 凭据；无效、过期或撤销的 Bearer 返回401，不能回退到本机Owner或有效Cookie。未提供 Authorization 时，沿用回环可信会话或密码Cookie。凭据继承所属用户当前角色的收紧与工作区约束；工作区变化后失效。本机Owner发放的凭据仅在本机可信模式有效。Agent凭据和私有runner节点凭据互不通用。
 

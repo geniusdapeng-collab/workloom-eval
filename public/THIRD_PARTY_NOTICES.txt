@@ -1,4 +1,4 @@
-WorkLoom Eval — Third-party notices for the browser distribution
+秀吉系统 — Third-party notices for the browser distribution
 
 The browser distribution includes the packages listed below. Their original
 copyright and license texts are reproduced from the installed, locked packages.

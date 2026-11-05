@@ -471,7 +471,7 @@ export function Login({ onSuccess }) {
           <Layers3 size={25} />
         </span>
         <h1>
-          WorkLoom <b>Eval</b>
+          秀吉<b>系统</b>
         </h1>
         <p>登录数字员工评测工作空间</p>
         <form

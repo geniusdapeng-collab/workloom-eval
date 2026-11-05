@@ -87,6 +87,11 @@ const output = (result) => {
 test("CLI help and capabilities are JSON-only, complete and available without a running service", async () => {
   const help = await run(["--help"]);
   assert.equal(help.code, 0);
+  assert.equal(
+    output(help).product,
+    "丰臣秀吉数字员工评测与迭代平台（秀吉系统）CLI",
+  );
+  assert.equal(output(help).usage[0], "workloom-eval --help");
   assert.ok(output(help).usage.some((line) => line.includes("call OP")));
   const capabilities = await run(["capabilities"]);
   assert.equal(capabilities.code, 0);

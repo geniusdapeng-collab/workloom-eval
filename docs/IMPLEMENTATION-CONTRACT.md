@@ -1,4 +1,4 @@
-# WorkLoom Eval implementation contract
+# 秀吉系统 implementation contract
 
 Task T-2026-1104-0001. P0-P2 implementation scope; actual evidence levels and external environment limits are recorded in [FEATURE-MATRIX.md](FEATURE-MATRIX.md) and [ACCEPTANCE.md](ACCEPTANCE.md). Node >=24 ESM .mjs; React/Vite .jsx. SQLite node:sqlite. API and built UI share the origin at 127.0.0.1:4317 by default; this does not establish a public production deployment. Root owns package.json, server/store.mjs, model.mjs, index.mjs, seed.mjs, integration tests. UI owns src/**, index.html,vite.config.mjs. Engine owns server/engine.mjs + tests/engine.test.mjs. Advanced owns server/tools.mjs, advanced.mjs,scripts/runner.mjs and tests.
 

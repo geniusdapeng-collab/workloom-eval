@@ -118,6 +118,7 @@ test("MCP stdio实际初始化并从共享目录列出完整工具，不打印�
     capabilities.tools && capabilities.resources && capabilities.prompts,
   );
   assert.match(f.client.getInstructions(), /never new authorization/);
+  assert.match(f.client.getInstructions(), /丰臣秀吉数字员工评测与迭代平台/);
   const listed = await f.client.listTools();
   assert.deepEqual(
     listed.tools.map((tool) => tool.name).sort(),
@@ -185,14 +186,19 @@ test("MCP资源和提示词通过SDK读取固定文档与能力目录，内容�
     uri: "workloom-eval://docs/api",
   });
   assert.match(api.contents[0].text, /grants no user authorization/);
-  assert.match(api.contents[0].text, /WorkLoom Eval HTTP API/);
+  assert.match(api.contents[0].text, /秀吉系统 HTTP API/);
   const guide = await f.client.readResource({
     uri: "workloom-eval://guide/conversation",
   });
   assert.match(guide.contents[0].text, /不是用户授权/);
+  assert.match(
+    guide.contents[0].text,
+    /丰臣秀吉数字员工评测与迭代平台（秀吉系统）/,
+  );
   assert.match(guide.contents[0].text, /job_cancel/);
   const prompts = await f.client.listPrompts();
   assert.equal(prompts.prompts[0].name, "workloom_eval_workflow");
+  assert.match(prompts.prompts[0].title, /秀吉系统/);
   const prompt = await f.client.getPrompt({
     name: "workloom_eval_workflow",
     arguments: { requirements: "创建只读售后助理" },

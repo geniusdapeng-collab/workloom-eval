@@ -355,7 +355,7 @@ export default function App() {
           <Layers3 size={28} />
         </div>
         <h1>
-          WorkLoom <b>Eval</b>
+          秀吉<b>系统</b>
         </h1>
         <LoaderCircle size={22} className="spin" />
         <p>正在连接评测工作空间</p>
@@ -370,18 +370,19 @@ export default function App() {
         <a
           href="#overview"
           className="brand"
+          title="丰臣秀吉数字员工评测与迭代平台"
           onClick={() => navigate("overview")}
         >
           <span className="brand-mark">
             <Layers3 size={22} />
           </span>
           <span>
-            WorkLoom <b>Eval</b>
+            秀吉<b>系统</b>
             <small>数字员工评测与迭代</small>
           </span>
         </a>
         <div className="workspace">
-          <span className="workspace-avatar">W</span>
+          <span className="workspace-avatar">秀</span>
           <div>
             <strong>
               {session?.workspaceName || session?.workspace || "默认工作空间"}
@@ -535,9 +536,7 @@ export default function App() {
         <main>
           <div className="page-heading">
             <div>
-              <div className="eyebrow">
-                WORKLOOM EVAL / {page.toUpperCase()}
-              </div>
+              <div className="eyebrow">秀吉系统 / {page.toUpperCase()}</div>
               <h1>{PAGE[page]?.[0]}</h1>
               <p>{PAGE[page]?.[1]}</p>
             </div>
@@ -617,7 +616,7 @@ export default function App() {
               <ShieldCheck size={13} />
               版本可追溯 · 结果有依据 · 仿真与真实执行分明
             </span>
-            <span>WorkLoom Eval</span>
+            <span>秀吉系统</span>
           </footer>
         </main>
       </div>
