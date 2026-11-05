@@ -58,7 +58,9 @@ export function validateData(value, depth = 0) {
   if (
     typeof value === "string" &&
     (/gh[pousr]_[A-Za-z0-9]{24,}/.test(value) ||
-      /sk-[A-Za-z0-9]{24,}/.test(value))
+      /sk-[A-Za-z0-9]{24,}/.test(value) ||
+      /github_pat_[A-Za-z0-9_]{20,}/.test(value) ||
+      /wle_[A-Za-z0-9_-]{40,}/.test(value))
   )
     throw new HttpError(
       422,

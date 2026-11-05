@@ -101,3 +101,17 @@ pnpm exec playwright install chromium
 ## 交付边界
 
 代码仓库、可运行本地服务与前端构建是本次交付面。公网生产域名、云主机、组织身份源和外部训练商账号需目标环境配置，不由“代码已构建”推断已经上线。生产部署必须启用密码/会话鉴权并配置受控秘密、网络允许列表与持久卷，见部署文档。
+
+## 通过 Codex / Qoder 对话使用
+
+平台提供 35 个共享操作的 JSON CLI 和 stdio MCP 服务端。Agent 可以发现能力、配置授权资产、提交并跟踪评测/迭代、读取报告，无需在网页中逐项操作。
+
+```sh
+pnpm cli capabilities
+pnpm cli doctor
+pnpm agent:setup --client codex --install
+```
+
+安装器将本机 MCP 连接和运行 Skill 合并至用户配置，保留其他模型提供方与连接器；新聊天或重载后调用 `workloom_eval_doctor` 验证。MCP launcher 会复用已运行的平台，或在需要时启动本机服务。远端平台通过 HTTPS 和受限 Bearer 凭据连接；凭据只从受控环境读取。
+
+完整安装、Qoder 配置、认证、对话示例及恢复边界见 [Agent 集成指南](docs/AGENT-INTEGRATION.md)。消费项目可参考 [运营 Agent 指引](integrations/agent-guide/AGENTS.md)；本仓开发仍遵循根 AGENTS.md。

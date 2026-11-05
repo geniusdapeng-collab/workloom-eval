@@ -3,7 +3,7 @@ import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { getCookie, setCookie, deleteCookie } from "hono/cookie";
 import { randomBytes, timingSafeEqual } from "node:crypto";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -19,8 +19,12 @@ import { seed } from "./seed.mjs";
 import { createToolService } from "./tools.mjs";
 import { createEngine } from "./engine.mjs";
 import { createAdvanced } from "./advanced.mjs";
+import { createAgentAccess } from "./agent-access.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
+const VERSION = JSON.parse(
+  readFileSync(resolve(ROOT, "package.json"), "utf8"),
+).version;
 const mutableKinds = new Set([
   "employees",
   "knowledge",
@@ -127,6 +131,7 @@ export function createApplication(options = {}) {
   const app = new Hono(),
     active = new Map(),
     loginAttempts = new Map();
+  const agentAccess = createAgentAccess({ store, localMode });
   let pumping = false,
     closed = false;
   const allJobs = () =>
@@ -487,22 +492,82 @@ export function createApplication(options = {}) {
     if (c.req.path.startsWith("/api/runner/")) return next();
     if (c.req.path === "/api/auth/login" || c.req.path === "/api/health")
       return next();
-    const user = localMode
-      ? {
-          id: "local-owner",
-          email: "local@workloom",
-          workspace: "default",
-          role: "admin",
-        }
-      : store.session(getCookie(c, "eval_session"));
+    const authorization = c.req.header("authorization");
+    const agent = authorization
+      ? agentAccess.authenticate(authorization)
+      : null;
+    const user =
+      agent?.user ||
+      (localMode
+        ? {
+            id: "local-owner",
+            email: "local@workloom",
+            workspace: "default",
+            role: "admin",
+          }
+        : store.session(getCookie(c, "eval_session")));
     if (!user && c.req.path !== "/api/session")
       throw new HttpError(401, "LOGIN_REQUIRED", "请先登录");
     c.set("user", user);
+    if (agent) c.set("agentCredentialId", agent.credentialId);
     await next();
   });
   app.get("/api/health", (c) =>
-    c.json({ ok: true, product: "workloom-eval", version: "1.0.0" }),
+    c.json({ ok: true, product: "workloom-eval", version: VERSION }),
   );
+  app.get("/api/agent/capabilities", (c) =>
+    c.json({
+      product: "workloom-eval",
+      version: VERSION,
+      apiVersion: "1",
+      workspace: workspace(c),
+      role: c.get("user")?.role,
+      authentication: ["local-loopback", "session-cookie", "scoped-bearer"],
+      jobTypes: [...ENGINE_JOBS, ...ADVANCED_JOBS],
+      endpoints: {
+        jobs: "/api/jobs",
+        resources: "/api/resources/:kind",
+        reports: "/api/reports/:id/export",
+        versions: "/api/versions/:id/export",
+      },
+      workflow: [
+        "discover",
+        "configure-assets",
+        "create_employee",
+        "evaluate",
+        "optimize",
+        "read-report",
+      ],
+      rules: {
+        sealedDataRedacted: true,
+        productionWritesRequireApproval: true,
+        writeRetriesAutomatic: false,
+        jobSubmissionIsCompletion: false,
+      },
+    }),
+  );
+  function credentialManager(c) {
+    const u = requireRole(c, "admin");
+    if (c.get("agentCredentialId"))
+      throw new HttpError(
+        403,
+        "AGENT_CREDENTIAL_MANAGEMENT_DENIED",
+        "请使用管理员会话管理Agent凭据，Bearer凭据不能铸造其他凭据",
+      );
+    return u;
+  }
+  app.get("/api/agent/tokens", (c) => {
+    credentialManager(c);
+    return c.json(agentAccess.list(workspace(c)));
+  });
+  app.post("/api/agent/tokens", async (c) => {
+    const u = credentialManager(c);
+    return c.json(agentAccess.issue(u, await body(c)), 201);
+  });
+  app.delete("/api/agent/tokens/:id", (c) => {
+    credentialManager(c);
+    return c.json(agentAccess.revoke(workspace(c), c.req.param("id")));
+  });
   app.get("/api/session", (c) =>
     c.json({
       user: c.get("user") || null,

@@ -24,7 +24,7 @@ let failed = false;
 let checked = 0;
 for (const p of all) {
   if (
-    !/\.(mjs|js|jsx|json|md|yml|yaml|html|css|txt|command)$/.test(p) &&
+    !/\.(mjs|js|jsx|json|md|yml|yaml|html|css|txt|command|example)$/.test(p) &&
     ![
       "LICENSE",
       "NOTICE",
@@ -41,6 +41,7 @@ for (const p of all) {
     /gh[pousr]_[A-Za-z0-9]{24,}/,
     /github_pat_[A-Za-z0-9_]{20,}/,
     /sk-[A-Za-z0-9]{24,}/,
+    /wle_[A-Za-z0-9_-]{40,}/,
     /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
   ])
     if (pattern.test(text)) {

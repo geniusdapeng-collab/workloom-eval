@@ -1,0 +1,13 @@
+# Merge this table into the chosen Codex config; do not replace unrelated settings.
+# Replace both absolute paths. No shell expansion is performed in args.
+# Put EVAL_API_TOKEN in the launching process environment, never in this file.
+# For a remote platform, change only EVAL_URL to its actual HTTPS origin.
+[mcp_servers.workloom_eval]
+command = "/ABSOLUTE/PATH/TO/node"
+args = ["/ABSOLUTE/PATH/TO/workloom-eval/scripts/agent-launcher.mjs"]
+env_vars = ["EVAL_API_TOKEN", "EVAL_SESSION_TOKEN", "EVAL_SESSION_COOKIE", "DEEPSEEK_API_KEY"]
+startup_timeout_sec = 30
+tool_timeout_sec = 75
+
+[mcp_servers.workloom_eval.env]
+EVAL_URL = "http://127.0.0.1:4317"

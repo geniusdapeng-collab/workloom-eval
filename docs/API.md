@@ -4,11 +4,11 @@
 
 ## 会话、权限和工作区
 
-默认 `EVAL_AUTH_MODE=local` 仅允许服务绑定回环地址，每个本机请求使用 `default` 工作区的本地管理员身份。需要实际区分管理员、编辑者和查看者时，使用密码模式；本地模式不会因为创建了一个查看者账号就切换到查看者权限。
+默认 `EVAL_AUTH_MODE=local` 仅允许服务绑定回环地址，未提供 Authorization 的本机请求使用 `default` 工作区的本地管理员身份；提供 Bearer 时始终按该凭据的角色与工作区认证。需要实际区分管理员、编辑者和查看者时，使用密码模式；本地模式不会因为创建了一个查看者账号就切换到查看者权限。
 
-密码模式首次启动需要 `EVAL_ADMIN_PASSWORD`，可选 `EVAL_ADMIN_EMAIL`。登录返回 HTTP-only、SameSite Strict 的 `eval_session` Cookie；HTTPS 请求的 Cookie 带 Secure 属性。后续业务请求通过该 Cookie 认证。私有运行器使用独立 Bearer token，见 [私有执行器](PRIVATE-RUNNER.md)。
+密码模式首次启动需要 `EVAL_ADMIN_PASSWORD`，可选 `EVAL_ADMIN_EMAIL`。登录返回 HTTP-only、SameSite Strict 的 `eval_session` Cookie；HTTPS 请求的 Cookie 带 Secure 属性。后续业务请求可通过该 Cookie 或本节末尾 Agent 访问章节所述的受限 Bearer 认证。私有运行器使用另一类独立 Bearer token，见 [私有执行器](PRIVATE-RUNNER.md)。
 
-工作区由当前会话决定。客户端不能通过 JSON 中的 `workspace` 参数切换工作区；跨区资源 ID 按无访问权或不存在处理。修改请求需同源，local 模式还检查本机 Host。
+工作区由当前已认证会话或 Agent 凭据决定。客户端不能通过 JSON 中的 `workspace` 参数切换工作区；跨区资源 ID 按无访问权或不存在处理。修改请求需同源，local 模式还检查本机 Host。
 
 | 权限   | 允许的操作                                                                                                                            |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
@@ -306,3 +306,20 @@ target 的路径后会追加 `/status`；查询参数重新设置为 employeeId�
 | 502/503/504 | 上游响应异常、服务未配置、环境错误或超时；先查看任务、回执和不确定状态 |
 
 不要仅根据 HTTP 200/202 或任务 completed 判断员工合格、权重训练完成或生产发布成功。判断依据分别是运行与报告、提供方训练终态，以及部署同步回执。
+
+## Agent CLI / MCP 访问
+
+CLI 和 stdio MCP 通过同一 REST API、同一工作区与权限运行。连接器没有直接数据库访问。完整操作 Schema 由 CLI `capabilities` 与 MCP tools/list 提供，服务端 `GET /api/agent/capabilities` 返回产品、版本、apiVersion、当前工作区/角色、14 个任务类型及工作流程约束。
+
+认证优先级：提供 Authorization 时只验证 `Bearer` Agent 凭据；无效、过期或撤销的 Bearer 返回401，不能回退到本机Owner或有效Cookie。未提供 Authorization 时，沿用回环可信会话或密码Cookie。凭据继承所属用户当前角色的收紧与工作区约束；工作区变化后失效。本机Owner发放的凭据仅在本机可信模式有效。Agent凭据和私有runner节点凭据互不通用。
+
+| 接口                           | 权限与结果                                                                                                                                     |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /api/agent/capabilities`  | 当前已认证调用者；不触发模型探测                                                                                                               |
+| `GET /api/agent/tokens`        | 管理员会话；仅返回名称、角色、工作区、创建/过期/撤销时间，不返回哈希或原始值                                                                   |
+| `POST /api/agent/tokens`       | 管理员会话；`{name,role?,expiresInSeconds?}`。默认editor和7天；TTL为1小时至90天。返回`{credential,token,oneTime:true}`，只在本次响应展示原始值 |
+| `DELETE /api/agent/tokens/:id` | 管理员会话；立即撤销，返回`{id,revoked:true}`                                                                                                  |
+
+Bearer调用者即使被授予admin也不能访问凭据管理接口，避免连接器自行铸造长期凭据。数据库只保留令牌摘要；原始值通过`EVAL_API_TOKEN`环境注入客户端，不进入模板、运行Skill、业务JSON或报告。相关错误包括`INVALID_AGENT_TOKEN`(422)、`AGENT_AUTH_INVALID`(401)、`AGENT_OWNER_INVALID`(401)、`AGENT_CREDENTIAL_MANAGEMENT_DENIED`(403)。
+
+新增接口保留生产授权、盲测过滤、不可变版本、修订冲突和请求幂等机制。提交job只表示受理；CLI/MCP等待有时限，超时后查询原job，不自动重发或取消。

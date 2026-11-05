@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "workloom_eval": {
+      "type": "stdio",
+      "command": "/ABSOLUTE/PATH/TO/node",
+      "args": ["/ABSOLUTE/PATH/TO/workloom-eval/scripts/agent-launcher.mjs"],
+      "env": {
+        "EVAL_URL": "http://127.0.0.1:4317"
+      },
+      "timeout": 75000
+    }
+  }
+}
